@@ -1,0 +1,40 @@
+#! /usr/bin/env node
+// 配置可执行命令 使用的是 commander
+const program = require('commander')
+
+
+// 配置创建程序的命令
+program
+    .command('create <app-name>') // 使用waze create 去创建一个项目
+    .description('create a new project') // 提示
+    .option('-f, --force','overwrite target directory if it exists') // 命令后面可以带参数 如果项目重名了强制覆盖
+    .action((name,cmd) => {
+      // 那么 参数 就是 当我们运行 waze create xxx 的时候 xxx 就是name
+      // cmd 就是 当我们运行 waze create xxx -f 的时候 -f 就是
+      console.log(name,'===name');
+      console.log(cmd,'===cmd');      
+    })
+
+
+
+
+// 配置创建程序的命令
+program
+    .command('create <app-name>') // 使用waze create 去创建一个项目
+    .description('create a new project') // 提示
+    .option('-f, --force','overwrite target directory if it exists') // 命令后面可以带参数 如果项目重名了强制覆盖
+    .action((name,cmd) => {
+      // 那么 参数 就是 当我们运行 waze create xxx 的时候 xxx 就是name
+      // cmd 就是 当我们运行 waze create xxx -f 的时候 -f 就是
+      console.log(name,'===name');
+      console.log(cmd,'===cmd');      
+    })
+
+    
+
+program
+    .version(`waze-cli@${require('../package.json').version}`)
+    .usage('<command> [option]')
+
+// 解析用户执行命令的传入参数
+program.parse()

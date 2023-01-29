@@ -1,0 +1,50 @@
+#! /usr/bin/env node
+
+const { Command } = require('commander');
+
+// 加载到专门创建项目的 命令函数
+const create = require('../lib/create')
+const program = new Command();
+
+
+// 当运行waze 命令的时候 会打印出来的名字 提示  和版本号
+program
+  .name('waze-cli')
+  .description('WangZheng Cli Utils')
+  .version(`${require('../package.json').version}`);
+
+// 配置创建程序的命令
+program
+    .command('create <app-name>') // 使用waze create 去创建一个项目
+    .description('create a new project') // 提示
+    .option('-f, --force','overwrite target directory if it exists') // 命令后面可以带参数 如果项目重名了强制覆盖
+    .action((name,cmd) => {
+      // 那么 参数 就是 当我们运行 waze create xxx 的时候 xxx 就是name
+      // cmd 就是 当我们运行 waze create xxx -f 的时候 -f 就是
+      create(name,cmd)
+    })
+
+
+// 配置 设置值 取值 命令
+
+program
+    .command('config [value]')
+    .description('inspect adn modify the config')
+    .option('-g, --get <path>','get value from option') // 配置 waze config get a 的值
+    .option('-s, --set <path> <value>') // 设置 waze config --set a 1  就会在下面action 里的 cmd 变成 {a}
+    .option('-d, --delete <path>','delete option from config')
+    .action((value,cmd) => {
+      // 这里的value 就是 set 后面设置的值
+      console.log(value);
+      console.log(cmd);
+    })
+
+// 使用了 on 监听了 当用户在命令行输入 --help 命令回调里可以在窗口打印命令
+program.on('--help',() => {
+  console.log();
+  console.log('监听了 --help命令');
+  console.log();
+})
+
+
+program.parse();
