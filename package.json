@@ -1,6 +1,6 @@
 {
-  "name": "waze",
-  "version": "1.0.0",
+  "name": "loan_git",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -15,8 +15,10 @@
   "dependencies": {
     "axios": "^0.27.2",
     "commander": "^10.0.0",
+    "download-git-repo": "^1.1.0",
     "fs-extra": "9",
-    "inquirer": "8.2.5"
+    "inquirer": "8.2.5",
+    "ora": "^5.4.1"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
